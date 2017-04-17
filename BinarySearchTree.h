@@ -70,7 +70,7 @@ template < class T >
 int BinarySearchTree<T>::getHeight()
 {
    //DO THIS
-    //return getHeight(getRootNode());
+    return getHeight(getRootNode());
 // mabye wrong one  
 
 }
@@ -80,7 +80,7 @@ int BinarySearchTree<T>::getHeight(TreeNode<T>* tNode)
 {
    //DO THIS
    //Mabye wrong
-  /* if (tNode == NULL)
+  if (tNode == NULL)
    {
        return 0;
    }
@@ -98,14 +98,16 @@ int BinarySearchTree<T>::getHeight(TreeNode<T>* tNode)
           return right + 1;
        }
    }
-*/
+
 
 }
 
 template < class T >
 bool BinarySearchTree<T>::isBalanced()
 {
-   //DO THIS
+   //DO THIS 
+   bool bal = isBalanced(root);
+    return bal;
 
 }
 
@@ -114,10 +116,38 @@ bool BinarySearchTree<T>::isBalanced(TreeNode<T>* tNode)
 {
    //DO THIS
 
+   if (tNode == NULL)
+   {
+       return true;
+   }
 
+   AVLTreeNode<T>* left = tNode->getLeft();
+   AVLTreeNode<T>* right = tNode->getRight();
 
+   bool left_bal = isBalanced(left);
+   if (left_bal == false)
+   {
+      return false;
+   }
 
+   bool right_bal = isBalanced(right);
+   if (right_bal == false)
+   {
+      return false;
+   }
+
+   int lh = getHeight(left);
+   int rh = getHeight(right);
+   if (abs(lh - rh) > 1)
+   {
+      return false;
+   }
+
+   return true;
 }
+
+
+
 
 template < class T >
 BinarySearchTree<T>* BinarySearchTree<T>::minimize()
