@@ -121,8 +121,8 @@ bool BinarySearchTree<T>::isBalanced(TreeNode<T>* tNode)
        return true;
    }
 
-   AVLTreeNode<T>* left = tNode->getLeft();
-   AVLTreeNode<T>* right = tNode->getRight();
+   TreeNode<T>* left = tNode->getLeft();
+   TreeNode<T>* right = tNode->getRight();
 
    bool left_bal = isBalanced(left);
    if (left_bal == false)
@@ -156,7 +156,7 @@ BinarySearchTree<T>* BinarySearchTree<T>::minimize()
    BinarySearchTree<T>* bst = new BinarySearchTree<T>(compare_items, compare_keys);
    //DO THIS
 	bst->minimize(items, 0, sze-1);
-	delete items[];
+	delete [] items;
 	return bst;
 
 
@@ -167,17 +167,14 @@ template < class T >
 void BinarySearchTree<T>::minimize(T** items, int first, int last)
 {
    //DO THIS (recursive minimize method)
-	if (first = last)
+	if (first <= last)
 	{
-		
+		int mid = (first + last)/2;
+		insert(items[mid]);
+		minimize( items, first, mid-1);//minimize left sub-array
+		minimize( items, mid+1, last);//minimize right sub-array
 	}
-	else 
-	{
-		mid = (first + last)/2;
-		
-		minimize( , first, mid-1);//minimize left sub-array
-		minimize( , mid+1, last);//minimize right sub-array
-	}
+	
 }
 
 template < class T >
@@ -205,8 +202,7 @@ BinarySearchTree<T>* BinarySearchTree<T>::minimizeComplete()
    BinarySearchTree<T>* bst = new BinarySearchTree<T>(compare_items, compare_keys);
    //DO THIS
    bst->minimizeComplete(items, 0, sze-1);
-  
-   delete items[];
+   delete [] items;
    return bst;
 
 
@@ -222,7 +218,6 @@ void BinarySearchTree<T>::minimizeComplete(T** items, int first, int last)
    //the log base e of 2 is 0.69314718
    //one over 0.69314718 = 1.442695042
    double log_factor = 1.442695042;
-
    if (first <= last)
    {
       //the rounding ensures that mid is included in the count (it is necessary)
@@ -252,22 +247,22 @@ void BinarySearchTree<T>::minimizeComplete(T** items, int first, int last)
             //DO THIS
             //try again with mid shifted one to the right
            
-         double k_left = log(mid)*log_factor;                   //log base 2 of the number of items to the left of mid (including mid)
+         double k_left = log(mid-first+1)*log_factor;                   //log base 2 of the number of items to the left of mid (including mid)
          double int_k_left = (int) (k_left + 0.5);               //same as above but rounded
          
 
-         double k_right = log(last-mid)*log_factor;           
+         double k_right = log(last-mid+1)*log_factor;           
 
          double int_k_right = (int) (k_right + 0.5);
 
 
-
+		 
          }
       }
          T* insertItem= items[mid];
-         bst->insert(insertItem);  //this may be incorrect 
-         minimizeComplete(items,0,mid);
-         minimizeComplete(items,mid,last);
+         insert(insertItem);  //this may be incorrect 
+         minimizeComplete(items,first,mid-1);
+         minimizeComplete(items,mid+1,last);
       //DO THIS
       //found the next item to insert into the tree
       //get it, insert it, and make two recursive calls
