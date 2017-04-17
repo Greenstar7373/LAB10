@@ -155,8 +155,9 @@ BinarySearchTree<T>* BinarySearchTree<T>::minimize()
    T** items = toArray();
    BinarySearchTree<T>* bst = new BinarySearchTree<T>(compare_items, compare_keys);
    //DO THIS
-
-
+	bst->minimize(items, 0, sze-1);
+	delete items[];
+	return bst;
 
 
 
@@ -166,12 +167,17 @@ template < class T >
 void BinarySearchTree<T>::minimize(T** items, int first, int last)
 {
    //DO THIS (recursive minimize method)
-
-
-
-
-
-
+	if (first = last)
+	{
+		
+	}
+	else 
+	{
+		mid = (first + last)/2;
+		
+		minimize( , first, mid-1);//minimize left sub-array
+		minimize( , mid+1, last);//minimize right sub-array
+	}
 }
 
 template < class T >

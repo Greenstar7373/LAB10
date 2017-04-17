@@ -79,8 +79,8 @@ int main()
    //display the height of the binary search tree (should be minimum height)
    //display whether the binary search tree is balanced (should be balanced)
 
-
-
+	cout<<"BST height:  "<<min_bst->getHeight()<<endl;
+	cout<<"BST is balanced:  "<<min_bst->isBalanced()<<endl;
 
 
 
@@ -105,7 +105,8 @@ int main()
    //display the height of the complete binary search tree (should be minimum height)
    //display whether the binary search tree is balanced (should be balanced)
 
-
+	cout<<"Complete BST height:  "<<complete_bst->getHeight()<<endl;
+	cout<<"Complete BST is balanced:  "<<complete_bst->isBalanced()<<endl;
 
 
 
