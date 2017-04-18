@@ -2,13 +2,14 @@
 #define BINARYSEARCHTREE_H
 
 #include "BinaryTreeIterator.h"
+#include <iostream>
 #include "TreeNode.h"
 #include "Text.h"
 #include "Line.h"
 #include "Drawable.h"
 using CSC2110::String;
 #include <cmath>
-
+using namespace std;
 template < class T >
 class BinarySearchTree : public Drawable
 {
@@ -220,33 +221,15 @@ void BinarySearchTree<T>::minimizeComplete(T** items, int first, int last)
    double log_factor = 1.442695042;
    if (first <= last)
    {
+	   cout<<"test 1"<<endl;
       //the rounding ensures that mid is included in the count (it is necessary)
       int mid = (int) ((last + first)/2.0 + 0.5);
 
       //start at mid and gradually move to the right to find the next element to insert into the tree
       //if first and last are the same, mid automatically succeeds (leaf element)
       if (first < last)
-      {
+      { cout<<"test 2"<<endl;
          //initial log computations using mid
-         double k_left = log(mid)*log_factor;                   //log base 2 of the number of items to the left of mid (including mid)
-         double int_k_left = (int) (k_left + 0.5);               //same as above but rounded
-         
-
-         double k_right = log(last-mid)*log_factor;           
-
-         double int_k_right = (int) (k_right + 0.5);
-
-         //keep searching for spot where the number of elements to the left of mid is 2^k - 1 (a full tree)
-         //which means the number of elements to the left of mid including mid is 2^k 
-         //or the number of elements to the right of mid is 2^k
-         //compare the direct log computation and the computation cast to an int
-         //to determine if the direct computation is an int
-         while (fabs(k_left - int_k_left) > TOL && fabs(k_right - int_k_right) > TOL)
-         {
-            mid++;
-            //DO THIS
-            //try again with mid shifted one to the right
-           
          double k_left = log(mid-first+1)*log_factor;                   //log base 2 of the number of items to the left of mid (including mid)
          double int_k_left = (int) (k_left + 0.5);               //same as above but rounded
          
@@ -254,6 +237,25 @@ void BinarySearchTree<T>::minimizeComplete(T** items, int first, int last)
          double k_right = log(last-mid+1)*log_factor;           
 
          double int_k_right = (int) (k_right + 0.5);
+int i=0;
+         //keep searching for spot where the number of elements to the left of mid is 2^k - 1 (a full tree)
+         //which means the number of elements to the left of mid including mid is 2^k 
+         //or the number of elements to the right of mid is 2^k
+         //compare the direct log computation and the computation cast to an int
+         //to determine if the direct computation is an int
+         while (fabs(k_left - int_k_left) > TOL && fabs(k_right - int_k_right) > TOL)
+         { 
+	 
+	 i++;
+	 cout<<"test"<< i<<endl;
+            mid++;
+            //DO THIS
+            //try again with mid shifted one to the right
+           
+          k_left = log(mid-first+1)*log_factor;                   //log base 2 of the number of items to the left of mid (including mid)
+         int_k_left = (int) (k_left + 0.5);               //same as above but rounded
+          k_right = log(last-mid+1)*log_factor;           
+          int_k_right = (int) (k_right + 0.5);
 
 
 		 
